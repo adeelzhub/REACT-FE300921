@@ -1,25 +1,30 @@
-import logo from './logo.svg';
+import React, {useState} from 'react';
 import './App.css';
+import { fetchRequest } from './utils';
 
-function App() {
+const App = ()=> {
+  const [username, setUsername] = useState();
+  const [email, setEmail] = useState();
+  const [password, setPassword] = useState();
+
+  const submitHandler = (e) =>{
+    e.preventDefault();
+    fetchRequest(username,email,password);
+    
+    // call fetch request for creating user
+  }
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
-}
+  <div className="App"> 
+    <form onSubmit={submitHandler}>
+      <input placeholder="Username" onChange={(e) =>setUsername(e.target.value)}/>
+      <input placeholder="Email" onChange = {(e) => setEmail(e.target.value)}/>
+      <input placeholder="Password" onChange = {(e) => setPassword(e.target.value)}/>
+    <button type="submit">Submit</button>
+    </form>
+    
+  </div>
+  )
+};
 
 export default App;
