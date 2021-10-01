@@ -1,4 +1,4 @@
-export const fetchRequest = async (username,email,password) =>{
+export const fetchRequest = async (username, email, password, setter) =>{
     try{
         console.log("fetch invoked")
         const response  = await fetch("http://localhost:5000/user",{
@@ -12,8 +12,9 @@ export const fetchRequest = async (username,email,password) =>{
             }),
             
         })
-        console.log(response);
 
+        const data = await response.json();
+        setter(data);
     }catch(error){
         console.log(error);
 
